@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<robot name="system" xmlns:xacro="http://ros.org/wiki/xacro" >
+
+    <xacro:include filename="$(find nova5)/urdf/arm/nova5_robot.xacro" />
+    <xacro:include filename="$(find nova5)/urdf/frame/door_frame.xacro" />
+
+    <joint name="arm_mount_joint" type="fixed">
+        <parent link="base_frame_link"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.025" rpy="0 0 1.570796327"/>
+    </joint>
+
+    <link name='world' />
+    <joint name="world_joint" type="fixed">
+        <origin xyz="0 0 1.625" rpy="3.141592654 0 0" />
+        <parent link="world" />
+        <child link="base_frame_link" />
+    </joint>
+
+
+    <xacro:include filename="$(find nova5)/urdf/arm/nova5_ros2_control.xacro" />
+    <xacro:nova5_robot_ros2_control name="FakeSystem"/>
+
+    
+<!-- 
+    <gazebo>
+        <plugin name="odom_publisher" filename="libgazebo_ros_p3d.so">
+            <bodyName>agv_base_link</bodyName>
+            <frameName>world</frameName>
+            <topicName>/agv/odom</topicName>
+            <updateRate>30.0</updateRate>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="trajectory_visualizer" filename="libtrajectory_visualizer.so">
+            <target_link>link_7</target_link>
+            <reference_frame>world</reference_frame>
+            <line_width>0.02</line_width>
+        </plugin>
+    </gazebo> -->
+
+</robot>

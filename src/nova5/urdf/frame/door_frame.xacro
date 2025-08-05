@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot name="door_frame" xmlns:xacro="http://ros.org/wiki/xacro" >
+
+    
+    <link name='base_frame_link'>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.0000001" />
+                <inertia 
+                    ixx="0.00000001"
+                    ixy="0"
+                    ixz="0"
+                    iyy="0.00000001"
+                    iyz="0"
+                    izz="0.0000001" />
+        </inertial>
+
+        <!-- 构建主横梁 -->
+        <visual>
+            <origin xyz='0.0 0.0 0.0' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="1.45 0.228 0.05"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 1'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 0.0 0.0' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="1.45 0.228 0.05"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建前支撑腿 -->
+        <visual>
+            <origin xyz='0.62 0.0 0.825' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.6"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 1'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.62 0.0 0.825' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.6"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建后横梁 -->
+        <visual>
+            <origin xyz='-0.675 0.0 0.05' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 1.7 0.05"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 1'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='-0.675 0.0 0.05' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 1.7 0.05"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建后支撑腿一 -->
+        <visual>
+            <origin xyz='-0.675 0.825 0.85' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.55"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 1'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='-0.675 0.825 0.85' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.55"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建后支撑腿二 -->
+        <visual>
+            <origin xyz='-0.675 -0.825 0.85' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.55"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 1'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='-0.675 -0.825 0.85' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.05 1.55"/>
+            </geometry>
+        </collision>
+        
+
+    </link>
+    
+</robot>
