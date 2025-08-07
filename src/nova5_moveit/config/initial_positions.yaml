@@ -1,0 +1,9 @@
+# Default initial positions for nova5_robot's ros2_control fake system
+
+initial_positions:
+  joint1: 0.000205949
+  joint2: 1.264784258
+  joint3: -1.082631226
+  joint4: 1.388643294
+  joint5: 1.57062703
+  joint6: -0.000190241

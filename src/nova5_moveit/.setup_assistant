@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: nova5
+    relative_path: urdf/arm/nova5_robot.xacro
+  srdf:
+    relative_path: config/nova5_robot.srdf
+  package_settings:
+    author_name: he
+    author_email: he@he.com
+    generated_timestamp: 1754445914
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

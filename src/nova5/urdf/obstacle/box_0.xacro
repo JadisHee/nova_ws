@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<robot name="box_0" xmlns:xacro="http://ros.org/wiki/xacro" >
+
+    
+    <link name='box_0_link'>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.0000001" />
+                <inertia 
+                    ixx="0.00000001"
+                    ixy="0"
+                    ixz="0"
+                    iyy="0.00000001"
+                    iyz="0"
+                    izz="0.0000001" />
+        </inertial>
+
+        <!-- 构建底板 -->
+        <visual>
+            <origin xyz='0.0 0.0 0.005' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.42 0.01"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 0.0 0.005' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.42 0.01"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建长侧板一 -->
+        <visual>
+            <origin xyz='0.0 0.2 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.02 0.225"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 0.2 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.02 0.225"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建长侧板二 -->
+        <visual>
+            <origin xyz='0.0 -0.2 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.02 0.225"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 -0.2 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.57 0.02 0.225"/>
+            </geometry>
+        </collision>
+
+
+        <!-- 构建短侧板一 -->
+        <visual>
+            <origin xyz='0.265 0.0 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.42 0.225"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.265 0.0 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.42 0.225"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建短侧板二 -->
+        <visual>
+            <origin xyz='-0.265 0.0 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.42 0.225"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='-0.265 0.0 0.1125' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.42 0.225"/>
+            </geometry>
+        </collision>
+    </link>
+
+</robot>

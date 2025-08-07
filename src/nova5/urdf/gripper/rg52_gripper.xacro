@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="rg52_gripper" params="prefix parent">
+    <!-- 本体 -->
+    <link name="${prefix}gripper_base">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://nova5/meshes/gripper/RG52-050.STL"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0.04 0" rpy="1.57 0 0"/>
+        <geometry>
+          <cylinder radius="0.0375" length="0.108"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}gripper_base_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}gripper_base"/>
+      <origin xyz="0 0.09 0" rpy="3.14 0 0"/>
+    </joint>
+
+    <!-- 手指（左右对称，0-26 mm 行程）-->
+    <link name="${prefix}finger_left">
+      <visual>
+        <origin xyz="0 0.03 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.06 0.015"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0.03 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.06 0.015"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}left_finger_joint" type="prismatic">
+      <parent link="${prefix}gripper_base"/>
+      <child link="${prefix}finger_left"/>
+      <origin xyz="0.0025 -0.07 0" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="0" upper="0.026" effort="50" velocity="0.04"/>
+    </joint>
+
+    <link name="${prefix}finger_right">
+      <visual>
+        <origin xyz="0 0.03 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.06 0.015"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0.03 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.06 0.015"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}right_finger_joint" type="prismatic">
+      <parent link="${prefix}gripper_base"/>
+      <child link="${prefix}finger_right"/>
+      <origin xyz="-0.0025 -0.07 0" rpy="0 0 0"/>
+      <axis xyz="-1 0 0"/>
+      <limit lower="0" upper="0.026" effort="50" velocity="0.04"/>
+      <mimic joint="${prefix}left_finger_joint" multiplier="1" offset="0"/>
+    </joint>
+  </xacro:macro>
+</robot>
