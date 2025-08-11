@@ -5,6 +5,26 @@
     <xacro:include filename="$(find nova5)/urdf/arm/nova5_robot.xacro" />
     <xacro:include filename="$(find nova5)/urdf/frame/door_frame.xacro" />
 
+    <!-- 转接板 -->
+    <xacro:include filename="$(find nova5)/urdf/gripper/adapter.xacro"/>
+    <joint name="adapter_arm_joint" type="fixed">
+        <parent link="Link6"/>
+        <child link="adapter_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <!-- <xacro:jxs_adapter prefix="gripper_" parent="Link6"/> -->
+
+    <!-- 夹爪 -->
+    <xacro:include filename="$(find nova5)/urdf/gripper/RG52_050.xacro"/>
+    <joint name="gripper_base_joint" type="fixed">
+        <parent link="adapter_link"/>
+        <child link="gripper_base_link"/>
+        <origin xyz="0 0 0.0241" rpy="0 0 0"/>
+    </joint>
+    <!-- <xacro:rg52_gripper prefix="gripper_" parent="gripper_plate2"/> -->
+
+
+
     <joint name="arm_mount_joint" type="fixed">
         <parent link="base_frame_link"/>
         <child link="base_link"/>
@@ -18,13 +38,14 @@
         <child link="base_frame_link" />
     </joint>
 
-    <xacro:include filename="$(find nova5)/urdf/obstacle/box_0.xacro" />
+    <!-- <xacro:include filename="$(find nova5)/urdf/obstacle/box_0.xacro" />
     <joint name="box_0_joint" type="fixed">
         <parent link="base_link"/>
         <child link="box_0_link"/>
         <origin xyz="-0.5615372 -0.1361008 0.8" rpy="3.141592654 0 1.570796327"/>
-        <!-- -0.5615372 -0.1361008 0.7732302 -->
-    </joint>
+    </joint> -->
+
+
     <!-- <xacro:include filename="$(find nova5)/urdf/arm/nova5_ros2_control.xacro" />
     <xacro:nova5_robot_ros2_control name="FakeSystem"/> -->
 

@@ -366,7 +366,7 @@
         <visual>
             <origin
                 xyz="0 0 0"
-                rpy="0 0 0" />
+                rpy="0 0 -3.14159" />
             <geometry>
                 <mesh
                 filename="package://nova5/meshes/nova5/Link6.STL" />
@@ -380,7 +380,7 @@
         <collision>
             <origin
                 xyz="0 0 0"
-                rpy="0 0 0" />
+                rpy="0 0 -3.14159" />
             <geometry>
                 <mesh
                 filename="package://nova5/meshes/nova5/Link6.STL" />
@@ -390,6 +390,7 @@
     <joint name="joint6" type="revolute">
         <origin
             xyz="0 0.088328 0"
+            
             rpy="-1.5708 0 0" />
         <parent
             link="Link5" />
@@ -404,3 +405,5 @@
             velocity="0" />
     </joint>
 </robot>
+
+<!-- rpy="-1.5708 -3.14159 0" -->

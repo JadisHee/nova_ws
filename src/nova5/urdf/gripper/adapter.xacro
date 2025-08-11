@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot name='adapter' xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <link name="adapter_link"> 
+        <!-- 构建底板一 -->
+        <visual>
+            <origin xyz='-0.01 0.0 0.006' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.1 0.08 0.012"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='-0.01 0.0 0.006' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.1 0.08 0.012"/>
+            </geometry>
+        </collision>
+
+        <!-- 构建底板二 -->
+        <visual>
+            <origin xyz='0.0 0.0 0.018' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.08 0.012"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 0.0 0.018' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.08 0.08 0.012"/>
+            </geometry>
+        </collision>
+
+        
+    </link>
+
+</robot>
