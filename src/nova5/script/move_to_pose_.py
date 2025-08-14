@@ -7,7 +7,7 @@ from moveit_msgs.srv import GetCartesianPath
 from geometry_msgs.msg import PoseStamped, Pose
 from shape_msgs.msg import SolidPrimitive
 from tf_transformations import quaternion_from_euler
-import sys, termios, tty, math, time
+import sys, termios, tty
 
 def wait_for_space():
     print("\n按下空格执行规划路径...")
@@ -187,12 +187,8 @@ class MoveIt2Planner(Node):
 
 
 
-def do_planning(target_pose,mod):
-    '''
-    * params:
-    *   target_pose: 目标位姿, geometry_msgs.msg.Pose
-    *   mod: 规划模式, int, 0为普通规划, 1为笛卡尔规划
-    '''
+def main(target_pose,mod):
+    import sys
     rclpy.init(args=None)
 
     # 从命令行获取规划模式 normal/cartesian，默认normal
@@ -211,18 +207,35 @@ def do_planning(target_pose,mod):
     node = MoveIt2Planner(mode=mode)
     node.wait_for_servers()
     
+    import time
     start_t = time.time()
     
+    # 设置目标位姿
+
+    # 位置_1
+    # target_pose = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+
+    # 位置_2
+    # target_pose = [-0.486758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+
+    # 目标位置
+    # target_pose = [-0.586758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+
+    # 位置_3
+    # target_pose = [-0.586758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+
+    # 位置_4
+    # target_pose = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
     target = PoseStamped()
     target.header.frame_id = 'base_link'
-    target.pose.position.x = target_pose.position.x 
-    target.pose.position.y = target_pose.position.y
-    target.pose.position.z = target_pose.position.z
-    # q = quaternion_from_euler(target_pose[3], target_pose[4], target_pose[5])
-    target.pose.orientation.x = target_pose.orientation.x
-    target.pose.orientation.y = target_pose.orientation.y
-    target.pose.orientation.z = target_pose.orientation.z
-    target.pose.orientation.w = target_pose.orientation.w
+    target.pose.position.x = target_pose[0]
+    target.pose.position.y = target_pose[1]
+    target.pose.position.z = target_pose[2]
+    q = quaternion_from_euler(target_pose[3], target_pose[4], target_pose[5])
+    target.pose.orientation.x = q[0]
+    target.pose.orientation.y = q[1]
+    target.pose.orientation.z = q[2]
+    target.pose.orientation.w = q[3]
 
     if mode == 'normal':
         traj = node.plan_normal(target, attempts=10)
@@ -242,52 +255,38 @@ def do_planning(target_pose,mod):
     rclpy.shutdown()
 
 
-def planning_cb(msg):
-    do_planning(msg,0)
+def wait_for_target(args=Node):
+    rclpy.init(args=args)
+    node = rclpy.create_node('TargetPose_subscriber')  
+    
 
-def main():
-    rclpy.init(args=None)
-    target_pose_sub = rclpy.create_node('TargetPose_subscriber')  
-    target_pose_sub.create_subscription(Pose, '/target/pose', planning_cb, 10)
-    print('等待目标点发布...')
-    try:
-        rclpy.spin(target_pose_sub)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        target_pose_sub.destroy_node()
-        rclpy.shutdown()
 
 
 if __name__ == '__main__':
+    import math
+    # 位置_1
+    target_pose_1 = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_1,1)
+    # 位置_2
+    target_pose_2 = [-0.486758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_2,1)
+    # 目标位置
+    target_pose = [-0.586758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose,1)
+    # 位置_3
+    target_pose_3 = [-0.586758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_3,1)
+    # 位置_4
+    target_pose_4 = [-0.586758423,-0.030443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_4,1)
+    # 位置_5
+    target_pose_5 = [-0.586758423,-0.030443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_5,1)
 
-    
-    main()
+    # 位置_6
+    target_pose_6 = [-0.486758423,-0.030443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_6,1)
 
-
-    # # 位置_1
-    # target_pose_1 = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_1,1)
-    # # 位置_2
-    # target_pose_2 = [-0.486758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_2,1)
-    # # 目标位置
-    # target_pose = [-0.586758423,-0.130443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose,1)
-    # # 位置_3
-    # target_pose_3 = [-0.586758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_3,1)
-    # # 位置_4
-    # target_pose_4 = [-0.586758423,-0.030443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_4,1)
-    # # 位置_5
-    # target_pose_5 = [-0.586758423,-0.030443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_5,1)
-
-    # # 位置_6
-    # target_pose_6 = [-0.486758423,-0.030443741,0.802750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_6,1)
-
-    # # 位置_1
-    # target_pose_1 = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
-    # main(target_pose_1,1)
+    # 位置_1
+    target_pose_1 = [-0.486758423,-0.130443741,0.702750366, -31.712141 * math.pi / 180,88.231888* math.pi / 180,151.753174* math.pi / 180]
+    main(target_pose_1,1)

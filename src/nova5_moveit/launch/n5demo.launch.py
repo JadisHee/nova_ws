@@ -42,10 +42,18 @@ def generate_launch_description():
         name='dobot_group_controller'
     )
 
+    # ✅ 启动 FollowJointTrajectory Action Server（MoveIt → 真实机械臂）
+    gripper_server = Node(
+        package='dobot_moveit',
+        executable='gripper_service_node',
+        name='gripper_service_node'
+    )
+
     return LaunchDescription([
         rsp,
         moveit_without_control,
         rviz,
         joint_states_relay,
         action_server,
+        gripper_server,
     ])

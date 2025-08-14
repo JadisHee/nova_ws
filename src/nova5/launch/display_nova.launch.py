@@ -46,7 +46,7 @@ def generate_launch_description():
     return launch.LaunchDescription([
         action_declare_arg_mode_path,
         action_robot_state_publisher,
-        # action_joint_state_publisher,
-        action_joint_state_publisher_gui,
+        action_joint_state_publisher,
+        # action_joint_state_publisher_gui,
         action_rviz_node
     ])

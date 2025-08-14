@@ -29,6 +29,7 @@ set(msg_files
         )
 
 set(srv_files
+       "srv/GripperCommand.srv"
        "srv/EnableRobot.srv"
        "srv/DisableRobot.srv"
        "srv/ClearError.srv"

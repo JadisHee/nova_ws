@@ -1,0 +1,4 @@
+int8 part_id          # 请求：零件ID
+---
+bool success          # 响应：是否成功
+string message        # 响应：信息

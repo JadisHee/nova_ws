@@ -782,7 +782,7 @@ bool CRRobotRos2::ModbusRTUCreate(const std::shared_ptr<dobot_msgs_v4::srv::Modb
 bool CRRobotRos2::ModbusCreate(const std::shared_ptr<dobot_msgs_v4::srv::ModbusCreate::Request> request,
                                const std::shared_ptr<dobot_msgs_v4::srv::ModbusCreate::Response> response)
 {
-    return commander_->callRosService(parseTool::parserModbusCreateRequest2String(request), response->res);
+    return commander_->callRosService_f(parseTool::parserModbusCreateRequest2String(request), response->res,response->robot_return);
 }
 
 bool CRRobotRos2::ModbusClose(const std::shared_ptr<dobot_msgs_v4::srv::ModbusClose::Request> request,

@@ -202,6 +202,20 @@
         <mimic joint="gripper_joint_1" multiplier="1" offset="0" />
     </joint>
 
+    <link name="finger_tips_link"> 
+    </link>
+    <joint
+        name="finger_tips_joint"
+        type="fixed">
+        <origin
+            xyz="0 0 0.18750"
+            rpy="0 0 0" />
+        <parent
+            link="gripper_base_link" />
+        <child
+            link="finger_tips_link" />
+    </joint>
+
     <link name="grip_link"> 
     </link>
     <joint

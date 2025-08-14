@@ -25,6 +25,8 @@ setup(
         'console_scripts': [
         'joint_states    = dobot_moveit.joint_states:main',
         'action_move_server    = dobot_moveit.action_move_server:main',
+        'gripper_service_node    = dobot_moveit.gripper_service_node:main',
+        'planning_node    = dobot_moveit.move_to_pose:main'
         ],
     },
 )
