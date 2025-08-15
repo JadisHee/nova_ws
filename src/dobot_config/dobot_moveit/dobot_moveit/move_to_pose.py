@@ -190,10 +190,25 @@ class MoveIt2Planner(Node):
         result_future = goal_handle.get_result_async()
         rclpy.spin_until_future_complete(self, result_future)
         self.get_logger().info("执行完成 ✅")
+        # self.finish_signal()
+
+    # def finish_signal(self):
+    #     node = rclpy.create_node('finish_signal_publisher')
+    #     publisher = node.create_publisher(bool, '/finish_signal', 10)
+    #     while rclpy.ok():
+    #         sub_count = publisher.get_subscription_count()
+    #         if sub_count > 0:
+    #             msg = True
+    #             publisher.publish(msg)
+    #             break
+    #         else:
+    #             node.get_logger().info('等待订阅者...')
+    #             rclpy.spin_once(node, timeout_sec=0.5)
+    #     node.destroy_node()
 
 
 
-def do_planning(node,target_pose,mod):
+def do_planning(node,target_pose):
     '''
     * params:
     *   target_pose: 目标位姿, geometry_msgs.msg.Pose
@@ -254,6 +269,8 @@ def do_planning(node,target_pose,mod):
             else:
                 node.get_logger().info(f'笛卡尔规划路径用时更少，使用笛卡尔规划')
                 traj = traj_cartesian[0]
+        node.get_logger().info(f'按空格执行规划')
+        wait_for_space()
         node.execute_trajectory(traj)
 
     # if mod == 0:
@@ -290,7 +307,7 @@ def trans_Pose_to_mat(pose:Pose):
 
 def planning_cb(msg:Pose, node):
 
-    do_planning(node=node,target_pose=msg,mod=0)
+    do_planning(node=node,target_pose=msg)
     print('\n\n等待目标点发布...')
 
 

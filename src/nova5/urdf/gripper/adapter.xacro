@@ -35,7 +35,22 @@
             </geometry>
         </collision>
 
-        
+        <!-- 构建夹具线区域 -->
+        <visual>
+            <origin xyz='0.0 -0.077 0.0225' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.07 0.095"/>
+            </geometry>
+            <material name='black'>
+                <color rgba='0.0 0.0 0.0 0.5'/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz='0.0 -0.077 0.0225' rpy='0.0 0.0 0.0'/>
+            <geometry>
+                <box size="0.04 0.07 0.095"/>
+            </geometry>
+        </collision>
     </link>
 
 </robot>
